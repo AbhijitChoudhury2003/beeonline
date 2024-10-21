@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Polco Veichle Cover</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        padding: 20px 40px;
+        background: #ffffff;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+      }
+
+      nav ul li {
+        margin-right: 20px;
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+      }
+
+      .hero {
+        background: url("./public/b8cc19ccbad4b40ca96db96e7eff1a6f.jpeg") center
+          center/cover;
+        padding: 150px 20px;
+        text-align: center;
+        color: white;
+      }
+
+      .hero-text h1 {
+        font-size: 42px;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      }
+
+      .hero-text h1 span {
+        color: gold;
+      }
+
+      .search-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+
+      .vehicle-type {
+        padding: 10px 20px;
+        margin-right: 10px;
+        cursor: pointer;
+        border: none;
+        background-color: #f5f5f5;
+      }
+
+      .vehicle-type.active {
+        background-color: #f68c2a;
+        color: white;
+      }
+
+      .brand,
+      .model {
+        padding: 10px;
+        margin-right: 10px;
+      }
+
+      .search-btn {
+        padding: 10px 20px;
+        background-color: #f68c2a;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      .product-section {
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        padding: 60px 20px;
+      }
+
+      .product-box {
+        width: 32%;
+        background-size: cover;
+        background-position: center;
+        color: white;
+        text-align: left;
+        padding: 20px;
+        padding-bottom: 120px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        position: relative;
+      }
+
+      .product-box h2 {
+        font-size: 1.5rem;
+      }
+
+      .product-box p {
+        margin: 10px 0;
+      }
+
+      #offer {
+        background-color: rgba(210, 207, 207, 0.3);
+        width: 24%;
+        padding: 5px;
+        border-radius: 2px;
+      }
+
+      .discount {
+        position: absolute;
+        font-size: 15px;
+        top: 10px;
+        right: 10px;
+        background-color: white;
+        color: black;
+        padding: 20px 5px;
+        border-radius: 50%;
+      }
+      .discount-product {
+        position: absolute;
+        bottom: -10px;
+        right: 1px;
+        padding: 5px 10px;
+      }
+
+      .product1 {
+        background-image: url("./public/b632837d8bcb50f61ddae915e7e943de.jpeg");
+      }
+
+      .product2 {
+        background-image: url("./public/8468c2f5bfa413578a44118fb66e54bf.jpeg");
+      }
+
+      @media (max-width: 768px) {
+        header {
+          flex-direction: column;
+        }
+        .logo {
+          padding-bottom: 10px;
+        }
+        nav ul li a {
+          font-size: 15px;
+        }
+
+        .search-section {
+          flex-direction: column;
+          padding: 20px 0px;
+        }
+        .brand,
+        .model,
+        .search-btn {
+          margin-bottom: 10px;
+        }
+      }
+
+      .categories-section {
+        text-align: center;
+        padding: 40px 10px;
+        background: #e3e8ed;
+        margin-bottom: 60px;
+      }
+
+      .categories-section h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+      }
+      .categories-section p {
+        color: rgba(0, 0, 0, 0.6);
+        margin-bottom: 20px;
+      }
+
+      .categories-list {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 2% 6%;
+      }
+
+      .category-box {
+        width: 15%;
+        text-align: start;
+        margin-bottom: 20px;
+        border-radius: 10px;
+      }
+      .fst {
+        width: 21.5%;
+      }
+
+      .category-box img {
+        width: 100%;
+        height: auto;
+      }
+
+      .category-box p {
+        margin-top: 25px;
+        font-size: 1rem;
+        font-weight: bolder;
+        width: 60%;
+        padding-left: 20px;
+      }
+
+      @media (max-width: 768px) {
+        .product-box {
+          width: 100%;
+        }
+
+        .category-box {
+          width: 45%;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .category-box {
+          width: 100%;
+        }
+      }
+
+      .why-choose-us {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+        padding: 40px 0;
+      }
+
+      .left-circle {
+        background: #93dbd2;
+        color: white;
+        border-radius: 50%;
+        width: 12%;
+        height: 45%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 130%;
+        font-weight: bold;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        position: absolute;
+        z-index: 1;
+        top: 30%;
+        left: 14%;
+      }
+
+      .middle-circle {
+        background: #e4e3e3;
+        color: black;
+        border-radius: 50%;
+        width: 300px;
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 12px;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .right-content {
+        display: flex;
+        flex-direction: column;
+        margin-left: 100px;
+        position: relative;
+      }
+
+      .right-content .item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+      }
+
+      .right-content .item .icon {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        padding: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2px;
+      }
+
+      .icon-1 {
+        background-color: #6a0dad;
+      }
+
+      .icon-2 {
+        background-color: #4a90e2;
+      }
+
+      .icon-3 {
+        background-color: #00bfa5;
+      }
+
+      .icon-4 {
+        background-color: #9e9e9e;
+      }
+
+      .right-content .item .text {
+        margin-left: 20px;
+      }
+
+      .right-content .item .text h4 {
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+      }
+
+      .right-content .item .text p {
+        font-size: 0.9rem;
+        color: #555;
+      }
+
+      @media (max-width: 768px) {
+        .why-choose-us {
+          flex-direction: column;
+        }
+
+        .left-circle {
+          width: 180px;
+          height: 180px;
+          font-size: 1.2rem;
+          position: relative;
+        }
+
+        .middle-circle {
+          left: 0;
+          width: 250px;
+          height: 250px;
+          position: static;
+          margin: 20px 0;
+        }
+
+        .right-content {
+          margin: 10px;
+          align-items: center;
+          margin-top: 12px;
+        }
+
+        .right-content .item {
+          justify-content: center;
+          text-align: start;
+        }
+
+        .right-content .item .text {
+          margin-left: 10px;
+          margin-top: 10px;
+        }
+      }
+      .features {
+        display: flex;
+        justify-content: space-around;
+        padding: 50px 20px;
+      }
+
+      .features .feature-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .features .feature-item img {
+        width: 50px;
+        height: 50px;
+      }
+
+      .features .feature-item p {
+        margin-top: 10px;
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 768px) {
+        .why-choose-us {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .why-choose-us .content {
+          margin: 0px 20px;
+        }
+
+        .why-choose-us .content .item {
+          justify-content: space-between;
+        }
+
+        .features {
+          flex-direction: row;
+        }
+
+        .features .feature-item {
+          margin-bottom: 20px;
+        }
+      }
+
+      .testimonials-section {
+        text-align: center;
+        padding: 60px 20px;
+        background-color: #e1e5f8;
+      }
+
+      .testimonials-section P {
+        font-size: 14px;
+        color: #404040;
+        margin-bottom: 10px;
+        letter-spacing: 2px;
+      }
+
+      .testimonials-section h2 {
+        font-size: 26px;
+        color: #333;
+        margin-bottom: 50px;
+      }
+
+      .testimonials-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 22px;
+      }
+
+      .testimonial-card {
+        background-color: white;
+        border-radius: 4px;
+        padding: 20px 30px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        flex-grow: 1;
+      }
+
+      .leftquotation {
+        width: 30px;
+        padding: 10px 0px 20px 0px;
+      }
+
+      .testimonial-text p {
+        font-style: italic;
+        letter-spacing: -0.01rem;
+        color: #555;
+        margin-bottom: 20px;
+        font-size: 1.1rem;
+      }
+
+      .client-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 25px;
+      }
+
+      .client-info img {
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+      }
+
+      .client-info p {
+        margin-top: 10px;
+        font-weight: bold;
+        color: #333;
+      }
+
+      @media (max-width: 768px) {
+        .testimonials-container {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .testimonial-card {
+          max-width: 90%;
+        }
+      }
+
+      footer {
+        background-color: #f8f8f8;
+        padding: 60px 10px 40px 10px;
+      }
+
+      .footer-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .footer-left {
+        flex: 1 1 100%;
+        margin-bottom: 20px;
+        margin-right: 30px;
+      }
+
+      .footer-left img {
+        width: 90px;
+      }
+
+      .newsletter {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .newsletter input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 200px;
+      }
+
+      .newsletter button {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 10px;
+      }
+      .social-icons a img {
+        width: 30px;
+      }
+      .social-icons a {
+        display: inline-block;
+        margin: 10px;
+      }
+
+      .footer-center,
+      .footer-right {
+        flex: 1;
+        margin: 20px 0;
+      }
+
+      .footer-center h4,
+      .footer-right h4 {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      .footer-center ul,
+      .footer-right ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .footer-center li,
+      .footer-right li {
+        margin: 5px 0;
+      }
+
+      .footer-center li a,
+      .footer-right li a {
+        color: #555;
+        text-decoration: none;
+        font-size: 14px;
+      }
+
+      @media (max-width: 768px) {
+        .footer-container {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+
+        .footer-center,
+        .footer-right {
+          flex: 1 1 100%;
+          margin-bottom: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img
+          src="./public//ef520538e59ada85ea3b3814ddf4c091.png"
+          alt="Polco"
+          width="75px"
+        />
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Shop by Category</a></li>
+          <li><a href="#">Car Covers</a></li>
+          <li><a href="#">Motorcycle Covers</a></li>
+          <li>
+            <a href="#"
+              ><img src="./public/shopping-cart.png" width="26px"
+            /></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Buy cover for your vehicle in <span>Easy steps with us.</span></h1>
+      </div>
+    </section>
+
+    <div class="search-section">
+      <button class="vehicle-type active">Four Wheeler</button>
+      <button class="vehicle-type">Two Wheeler</button>
+      <select class="brand">
+        <option>Select Brand</option>
+        <option>Thar</option>
+      </select>
+      <select class="model">
+        <option>Select Model</option>
+        <option>4x4</option>
+        <option>2x2</option>
+      </select>
+      <button class="search-btn">Search</button>
+    </div>
+
+    <div class="product-section">
+      <div class="product-box product1">
+        <span class="discount">65% off</span>
+        <div class="discount-product">
+          <img
+            src="./public/2a89e1deb395795fe4de8e30a3756d22.png"
+            alt="car"
+            width="200px"
+            ;
+          />
+        </div>
+        <div>
+          <h2>Harrier Car Cover</h2>
+          <p id="offer">Festive Offer</p>
+          <p>Lorem ipsum dolor sit amet consectetur.</p>
+        </div>
+      </div>
+      <div class="product-box product2">
+        <span class="discount">65% off</span>
+        <div class="discount-product">
+          <img
+            src="./public/2a89e1deb395795fe4de8e30a3756d22.png"
+            alt="car"
+            width="200px"
+            ;
+          />
+        </div>
+        <div>
+          <h2>Harrier Car Cover</h2>
+          <p id="offer">Festive Offer</p>
+          <p>Lorem ipsum dolor sit amet consectetur.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="categories-section">
+      <h2>Top Categories</h2>
+
+      <p>
+        Explore top rated Car Covers, Pool Covers and High quality Truck
+        Curtains from Polco
+      </p>
+      <div class="categories-list">
+        <div class="category-box fst">
+          <img
+            src="./public/8def3037555d3043045d887df4c40f11-removebg-preview.png"
+            alt="demo image"
+          />
+        </div>
+
+        <div class="category-box" style="background: #e9f7fa">
+          <p>Motorcycle Cover</p>
+          <img
+            src="./public/0d623153097f2ce38db7a57ee9b12a3d.png"
+            alt="Motorcycle Cover"
+          />
+        </div>
+        <div class="category-box" style="background: #ebfdefcc">
+          <p>Car Cover</p>
+          <img
+            src="./public/2a89e1deb395795fe4de8e30a3756d22.png"
+            alt="Car Cover"
+          />
+        </div>
+        <div class="category-box" style="background: #faf2e7cc">
+          <p>AutoRickshaw Cover</p>
+          <img
+            src="./public/317713178a1f3eb37772457c34ab4fbf.png"
+            alt="AutoRickshaw Cover"
+          />
+        </div>
+        <div class="category-box" style="background: #fef3e6b2">
+          <p>Bicycle Cover</p>
+          <img
+            src="./public/5fca140dc33d46bb1deb8051e1a7ee34.png"
+            alt="Bicycle Cover"
+          />
+        </div>
+      </div>
+    </div>
+
+    <section class="why-choose-us">
+      <div class="left-circle">
+        WHY <br />
+        CHOOSE <br />
+        US
+      </div>
+      <div class="middle-circle">
+        Lorem ipsum dolor sit amet <br />consectetur adipisicing elit.<br />
+        Reprehenderit molestias <br />sint? Magni cumque voluptates dolore<br />
+        autem veritatis maxime <br />
+        possimus.
+      </div>
+      <div class="right-content">
+        <div class="item">
+          <div class="icon icon-1">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1792 1792"
+              id="Diamond"
+            >
+              <path
+                d="m185.546 736.058 545.09 581.837-262.483-581.837H185.546zM896 1411.514l305.355-675.456h-610.71zM470.778 624.066l178.488-335.979H420.031L168.047 624.066h302.73zm590.586 693.83 545.09-581.838h-282.607zm-463.72-693.83h596.712l-178.489-335.979H776.133zm723.578 0h302.73L1371.97 288.087h-229.235zm123.367-425.223 335.978 447.971q12.25 15.75 11.375 36.31-.875 20.561-14.874 35.435l-839.946 895.942Q921.373 1632 896 1632q-25.373 0-41.122-17.499L14.932 718.56Q.933 703.685.058 683.124q-.875-20.56 11.375-36.31l335.978-447.97q15.749-22.75 44.622-22.75h1007.934q28.873 0 44.622 22.75z"
+                fill="#f9f9f9"
+                class="color000000 svgShape"
+              ></path>
+            </svg>
+          </div>
+          <div class="text">
+            <h4>High Quality</h4>
+            <p>This is a sample text. Insert your desired text here.</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="icon icon-2"><img src="./public/timer.png" /></div>
+          <div class="text">
+            <h4>24x7</h4>
+            <p>This is a sample text. Insert your desired text here.</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="icon icon-3"><img src="./public/tap (2).png" /></div>
+          <div class="text">
+            <h4>Check New Products</h4>
+            <p>This is a sample text. Insert your desired text here.</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="icon icon-4"><img src="./public/heart.png" /></div>
+          <div class="text">
+            <h4>Wishlist</h4>
+            <p>This is a sample text. Insert your desired text here.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="feature-item">
+        <img src="./public/quality-assurance (2).png" alt="Quality Control" />
+        <p>Quality Control</p>
+      </div>
+      <div class="feature-item">
+        <img src="./public/cargo-truck.png" alt="48 Hours Return Policy" />
+        <p>48 Hours Return Policy</p>
+      </div>
+      <div class="feature-item">
+        <img src="./public/headset.png" alt="Instant Live Chat" />
+        <p>Instant Live Chat</p>
+      </div>
+    </section>
+
+    <div class="testimonials-section">
+      <p>TESTIMONIALS</p>
+      <h2>What our clients say about us.</h2>
+      <div class="testimonials-container">
+        <div class="testimonial-card">
+          <img class="leftquotation" src="./public/left.png" />
+          <div class="testimonial-text">
+            <p>
+              “I've been working with these guys for a long time and I can say
+              that my house is in the perfect hands.”
+            </p>
+          </div>
+          <div class="client-info">
+            <img src="./public/Anjali_bc9b27267c.png" alt="Client 1" />
+            <p>Allan Collins</p>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <img class="leftquotation" src="./public/left.png" />
+          <div class="testimonial-text">
+            <p>
+              “Working with Sentry Oak is just great, every problem in my house
+              is solved in a matter of days.”
+            </p>
+          </div>
+          <div class="client-info">
+            <img src="./public/Rectangle_1491_ead089df5a.png" alt="Client 2" />
+            <p>Meggy Simpson</p>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <img class="leftquotation" src="./public/left.png" />
+          <div class="testimonial-text">
+            <p>
+              “Once a pipe burst in my kitchen and an hour later it was already
+              repaired, thanks to Sentry Oak.”
+            </p>
+          </div>
+          <div class="client-info">
+            <img src="./public/Vrinda_1daafd4303.png" alt="Client 3" />
+            <p>Tanya Grant</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-center">
+          <div class="footer-left">
+            <img
+              src="./public/ef520538e59ada85ea3b3814ddf4c091.png"
+              alt="Polco Logo"
+            />
+            <div class="newsletter">
+              <input type="email" placeholder="Enter your email address" />
+              <button>&#10148;</button>
+            </div>
+            <div class="social-icons">
+              <a href="#"><img src="./public/social.png" alt="Facebook" /></a>
+              <a href="#"
+                ><img src="./public/social (1).png" alt="Twitter"
+              /></a>
+              <a href="#"
+                ><img src="./public/instagram.png" alt="Instagram"
+              /></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-center">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="#">Camera</a></li>
+            <li><a href="#">Games</a></li>
+            <li><a href="#">Wireless Speaker</a></li>
+            <li><a href="#">Pizza Maker</a></li>
+          </ul>
+        </div>
+        <div class="footer-center">
+          <ul>
+            <li><a href="#">Headphones</a></li>
+            <li><a href="#">Yoghurt Maker</a></li>
+            <li><a href="#">Games</a></li>
+            <li><a href="#">Ice cream Maker</a></li>
+          </ul>
+        </div>
+        <div class="footer-center">
+          <h4>Help</h4>
+          <ul>
+            <li><a href="#">Track Your Order</a></li>
+            <li><a href="#">Warranty & Support</a></li>
+            <li><a href="#">Return Policy</a></li>
+            <li><a href="#">FAQs</a></li>
+          </ul>
+        </div>
+        <div class="footer-right">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Warranty Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
